@@ -1,12 +1,13 @@
 package com.recruit.controller;
 
-import com.recruit.dao.AdminMapper;
-import com.recruit.entity.Admin;
+import com.alibaba.fastjson.JSON;
+import com.recruit.dao.UserMapper;
+import com.recruit.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController {
 
     @Autowired
-    AdminMapper adminMapper;
+    UserMapper userMapper;
 
 
     @RequestMapping("/user/login")
@@ -23,9 +24,9 @@ public class LoginController {
             , @RequestParam("password") String password
             ,HttpServletRequest request){
 
-        Admin admin = new Admin(null, username, password);
-        System.out.println(admin);
-        request.setAttribute("user",admin);
+//        Admin admin = new Admin(1, username, password);
+//        System.out.println(admin);
+//        request.setAttribute("user",admin);
         return "login";
     }
 
@@ -53,9 +54,12 @@ public class LoginController {
     }
 
     @RequestMapping("/test")
+    @ResponseBody
     public String test(){
-        Admin admin = adminMapper.selectByPrimaryKey(1);
-        System.out.println(admin);
-        return "index";
+//        Admin admin = adminMapper.selectByPrimaryKey(1);
+        User user = userMapper.selectByPrimaryKey(1);
+        String msg = JSON.toJSONString(user);
+//        System.out.println(admin);
+        return msg;
     }
 }

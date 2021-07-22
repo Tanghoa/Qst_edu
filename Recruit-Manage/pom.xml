@@ -44,6 +44,16 @@
 
 
 
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.72</version>
+        </dependency>
+
+
+
+
         <!-- lombok类-->
         <dependency>
             <groupId>org.projectlombok</groupId>

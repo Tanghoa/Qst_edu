@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://127.0.0.1:3306/student?useUnicode=true&characterEncoding=UTF-8&useSSL=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://127.0.0.1:3306/recruit?useUnicode=true&characterEncoding=UTF-8&useSSL=true&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
@@ -13,5 +13,5 @@ spring:
     restart:
       enabled: false
 mybatis:
-  type-aliases-package: com.recruit.bean
+  type-aliases-package: com.recruit.entity
   mapper-locations: classpath:mapper/*.xml
