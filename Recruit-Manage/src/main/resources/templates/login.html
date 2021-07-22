@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>登入 - layuiAdmin</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../layui/css/admin.css">
+    <link rel="stylesheet" href="../layui/css/all.css">
+</head>
+<style>
+    body{
+
+
+    }
+    .img {
+        background: url(./image/aa.jpg) no-repeat;
+        background-size: auto 1040px;
+
+    }
+    .demo-carousel{height: 200px; line-height: 200px; text-align: center;}
+    .code {
+        width: 400px;
+        margin: 0 auto;
+    }
+    .input-val {
+        width: 298px;
+        float: left;
+        background: #ffffff;
+        height: 2.8rem;
+        padding: 0 2%;
+        border-radius: 5px;
+        border: none;
+        border: 1px solid rgba(0,0,0,.2);
+        font-size: 1.0625rem;
+    }
+    #canvas {
+        float: left;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .1btn {
+          width: 100px;
+          height: 40px;
+          background: #f1f1f1;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          margin: 20px auto 0;
+          display: block;
+          font-size: 1.2rem;
+          color: #e22e1c;
+          cursor: pointer;
+      }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .sett{
+        background: white;
+        opacity: 0.87;
+    }
+    .t1{
+        position: relative;
+    }
+    .t2{
+        position: absolute;
+        top: 146px;
+    }
+</style>
+<body class="img">
+
+<div class="layadmin-user-login layadmin-user-display-show"
+     id="LAY-user-login" style="display: none;">
+
+    <div class="layadmin-user-login-main t1">
+
+        <div
+                class="t2 layadmin-user-login-box layadmin-user-login-body layui-form sett">
+            <div class="layadmin-user-login-box layadmin-user-login-header">
+                <h2 style="color: grey ;size: 20px"><strong>登录</strong> </h2>
+
+            </div>
+            <form action="user/login"
+                  method="post" class="ui form">
+                <input type="hidden" name="${_csrf.parameterName}"
+                       value="${_csrf.token}" />
+
+                <div class="layui-form-item">
+
+                    <label
+                            class="layadmin-user-login-icon layui-icon layui-icon-username"
+                            for="LAY-user-login-username"></label>
+
+                    <!-- input的name属性值必须符合SpringSecurity规则，除非专门进行了定制，否则用户名必须使用username，密码必须使用password -->
+                    <input type="text" name="username" id="LAY-user-login-username"
+                           lay-verify="required" placeholder="用户名" value="admin" class="layui-input">
+                </div>
+
+                <div class="layui-form-item">
+                    <label
+                            class="layadmin-user-login-icon layui-icon layui-icon-password"
+                            for="LAY-user-login-password"></label> <input type="password"
+                                                                          name="password" id="LAY-user-login-password" value="123456"
+                                                                          lay-verify="required" placeholder="密码" class="layui-input">
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-row">
+                        <div class="layui-col-xs7">
+
+                            <div class="code layui-form-item">
+                                <label
+                                        class="layadmin-user-login-icon layui-icon layui-icon-vercode"
+                                        for="LAY-user-login-password"></label>
+                                <input type="text" value="" lay-verify="required" placeholder="请输入验证码（不区分大小写）"
+                                       class="input-val layui-input">
+                                <canvas id="canvas" width="100" height="43"></canvas>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="layui-form-item" style="margin-bottom: 20px;">
+                    <input type="checkbox" name="remember-me" lay-skin="primary"
+                           title="记住我"> <a href="forget.html"
+                                           class="layadmin-user-jump-change layadmin-link"
+                                           style="margin-top: 7px;">忘记密码？</a>
+                </div>
+                <div class="layui-form-item">
+                    <button type="submit" class="layui-btn layui-btn-fluid btn" lay-submit
+                            lay-filter="LAY-user-login-submit">登 入</button>
+                </div>
+            </form>
+            <div class="layui-trans layui-form-item layadmin-user-login-other">
+                <label>社交账号登入</label> <a href="javascript:;"><i
+                    class="layui-icon layui-icon-login-qq"></i></a> <a href="javascript:;"><i
+                    class="layui-icon layui-icon-login-wechat"></i></a> <a
+                    href="javascript:;"><i
+                    class="layui-icon layui-icon-login-weibo"></i></a>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+
+<div class="layui-trans layadmin-user-login-footer">
+    <p>
+        © 2021 <a href="http://www.layui.com/" target="_blank">@唐昊</a>
+    </p>
+</div>
+
+</div>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+
+
+
+
+<script src="../layui/layui.js"></script>
+<script>
+
+
+
+    $(function(){
+        var show_num = [];
+        draw(show_num);
+
+        $("#canvas").on('click',function(){
+            draw(show_num);
+        })
+        $(".btn").on('click',function(){
+            var val = $(".input-val").val().toLowerCase();
+            var num = show_num.join("");
+            if(val==''){
+                alert('请输入验证码！');
+            }else if(val == num){
+                alert('提交成功！');
+
+                draw(show_num);
+
+            }else{
+                alert('验证码错误！请重新输入！');
+                $(".input-val").val('');
+                draw(show_num);
+            }
+        })
+    })
+
+    function draw(show_num) {
+        var canvas_width=$('#canvas').width();
+        var canvas_height=$('#canvas').height();
+        var canvas = document.getElementById("canvas");//获取到canvas的对象，演员
+        var context = canvas.getContext("2d");//获取到canvas画图的环境，演员表演的舞台
+        canvas.width = canvas_width;
+        canvas.height = canvas_height;
+        var sCode = "A,B,C,E,F,G,H,J,K,L,M,N,P,Q,R,S,T,W,X,Y,Z,1,2,3,4,5,6,7,8,9,0";
+        var aCode = sCode.split(",");
+        var aLength = aCode.length;//获取到数组的长度
+
+        for (var i = 0; i <= 3; i++) {
+            var j = Math.floor(Math.random() * aLength);//获取到随机的索引值
+            var deg = Math.random() * 30 * Math.PI / 180;//产生0~30之间的随机弧度
+            var txt = aCode[j];//得到随机的一个内容
+            show_num[i] = txt.toLowerCase();
+            var x = 10 + i * 20;//文字在canvas上的x坐标
+            var y = 20 + Math.random() * 8;//文字在canvas上的y坐标
+            context.font = "bold 23px 微软雅黑";
+
+            context.translate(x, y);
+            context.rotate(deg);
+
+            context.fillStyle = randomColor();
+            context.fillText(txt, 0, 0);
+
+            context.rotate(-deg);
+            context.translate(-x, -y);
+        }
+        for (var i = 0; i <= 5; i++) { //验证码上显示线条
+            context.strokeStyle = randomColor();
+            context.beginPath();
+            context.moveTo(Math.random() * canvas_width, Math.random() * canvas_height);
+            context.lineTo(Math.random() * canvas_width, Math.random() * canvas_height);
+            context.stroke();
+        }
+        for (var i = 0; i <= 30; i++) { //验证码上显示小点
+            context.strokeStyle = randomColor();
+            context.beginPath();
+            var x = Math.random() * canvas_width;
+            var y = Math.random() * canvas_height;
+            context.moveTo(x, y);
+            context.lineTo(x + 1, y + 1);
+            context.stroke();
+        }
+    }
+
+    function randomColor() {//得到随机的颜色值
+        var r = Math.floor(Math.random() * 256);
+        var g = Math.floor(Math.random() * 256);
+        var b = Math.floor(Math.random() * 256);
+        return "rgb(" + r + "," + g + "," + b + ")";
+    }
+
+    layui
+        .use(
+            [ 'element', 'form' ],
+            function() {
+                var element = layui.element, form = layui.form, layer = layui.layer;
+                form.render();
+
+            });
+</script>
+</body>
+</html>
